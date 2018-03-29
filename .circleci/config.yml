@@ -1,0 +1,56 @@
+# Elixir CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-elixir/ for more details
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/elixir:latest
+      - image: circleci/postgres:10-alpine-ram
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v3-dependency-cache-{{ arch }}-{{ checksum "mix.lock" }}
+            - v3-dependency-cache-{{ arch }}
+            - v3-dependency-cache
+
+      - run: mix local.rebar --force
+      - run: mix local.hex --force
+      - run: mix deps.get
+      - run: mix deps.compile
+      - run: mix compile
+      - run:
+          command: mix compile
+          environment:
+            MIX_ENV: test
+
+      - save_cache:
+          key: v3-dependency-cache-{{ arch }}-{{ checksum "mix.lock" }}
+          paths:
+            - _build
+            - deps
+            - ~/.mix
+
+      - run: mix format --check-formatted
+      - run: mix test
+
+      - restore_cache:
+          keys:
+            - v3-plt-cache-{{ arch }}-{{ checksum "mix.lock" }}
+            - v3-plt-cache-{{ arch }}
+            - v3-plt-cache
+
+      - run: mix dialyzer --plt
+
+      - save_cache:
+          key: v3-plt-cache-{{ arch }}-{{ checksum "mix.lock" }}
+          paths:
+            - _build
+            - ~/.mix
+
+      - run: mix dialyzer --halt-exit-status
