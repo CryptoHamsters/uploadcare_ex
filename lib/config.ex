@@ -16,9 +16,14 @@ defmodule UploadcareEx.Config do
     get_env_var!(:accept_header)
   end
 
+  @spec store() :: binary()
+  def store do
+    get_env_var!(:store)
+  end
+
   @spec get_env_var!(atom()) :: binary()
   defp get_env_var!(key) do
-    case Application.get_env(:ethereumex, key) do
+    case Application.get_env(:uploadcare_ex, key) do
       value when is_binary(value) and value != "" -> value
       els -> raise ArgumentError, message: "Please set config variable `config :uploadcare_ex, #{key}`, got: `#{inspect els}``"
     end
