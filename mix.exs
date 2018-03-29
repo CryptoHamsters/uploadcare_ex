@@ -19,6 +19,7 @@ defmodule UploadcareEx.MixProject do
 
   defp deps do
     [
+      {:httpoison, "~> 1.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:credo, "~> 0.9.0-rc1", only: [:dev, :test], runtime: false}
     ]
