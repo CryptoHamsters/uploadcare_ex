@@ -1,0 +1,64 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://upload.uploadcare.com/from_url/?pub_key=3f5c4ce6fcdaf7aeace8&source_url=https%3A%2F%2Fi.imgur.com%2FqMV7tJ4.png"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"token\":\"034ac5bf-433a-446b-8c6f-4dbabaf1b2b0\",\"type\":\"token\"}",
+      "headers": {
+        "Date": "Thu, 29 Mar 2018 19:52:40 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "63",
+        "Connection": "keep-alive",
+        "Server": "nginx",
+        "Vary": "Accept-Encoding",
+        "Access-Control-Allow-Headers": "X-PINGOTHER, DNT",
+        "X-Content-Type-Options": "nosniff",
+        "Access-Control-Max-Age": "1",
+        "X-XSS-Protection": "1; mode=block",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, HEAD, OPTIONS"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://upload.uploadcare.com/from_url/status/?token=034ac5bf-433a-446b-8c6f-4dbabaf1b2b0"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\":\"success\",\"is_stored\":false,\"done\":327948,\"file_id\":\"172cc9ec-f418-410c-9c95-b813a27caf88\",\"total\":327948,\"size\":327948,\"uuid\":\"172cc9ec-f418-410c-9c95-b813a27caf88\",\"is_image\":true,\"filename\":\"qMV7tJ4.png\",\"is_ready\":false,\"original_filename\":\"qMV7tJ4.png\",\"image_info\":{\"orientation\":null,\"format\":\"PNG\",\"height\":480,\"width\":460,\"geo_location\":null,\"datetime_original\":null,\"dpi\":null},\"mime_type\":\"image/png\"}",
+      "headers": {
+        "Date": "Thu, 29 Mar 2018 19:52:40 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "422",
+        "Connection": "keep-alive",
+        "Server": "nginx",
+        "Vary": "Accept-Encoding",
+        "Access-Control-Allow-Headers": "X-PINGOTHER, DNT",
+        "X-Content-Type-Options": "nosniff",
+        "Access-Control-Max-Age": "1",
+        "X-XSS-Protection": "1; mode=block",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, HEAD, OPTIONS"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

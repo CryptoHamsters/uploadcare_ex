@@ -49,6 +49,7 @@ defmodule UploadcareEx.Upload.Url do
     [
       pub_key: Config.public_key(),
       source_url: url
-    ] |> URI.encode_query()
+    ]
+    |> URI.encode_query()
   end
 end

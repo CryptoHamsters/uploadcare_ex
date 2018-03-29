@@ -5,7 +5,7 @@ defmodule UplodcareEx.ConfigTest do
   describe "public_key/1" do
     test "fails with error if config is not provided" do
       assert_raise ArgumentError, fn ->
-        Config.public_key()
+        Config.private(_key())
       end
     end
   end

@@ -24,8 +24,13 @@ defmodule UploadcareEx.Config do
   @spec get_env_var!(atom()) :: binary()
   defp get_env_var!(key) do
     case Application.get_env(:uploadcare_ex, key) do
-      value when is_binary(value) and value != "" -> value
-      els -> raise ArgumentError, message: "Please set config variable `config :uploadcare_ex, #{key}`, got: `#{inspect els}``"
+      value when is_binary(value) and value != "" ->
+        value
+
+      els ->
+        raise ArgumentError,
+          message:
+            "Please set config variable `config :uploadcare_ex, #{key}`, got: `#{inspect(els)}``"
     end
   end
 end
