@@ -1,4 +1,4 @@
-defmodule UploadcareEx.Upload.Url do
+defmodule UploadcareEx.API.Upload.Url do
   alias UploadcareEx.Request
   alias UploadcareEx.Config
 
