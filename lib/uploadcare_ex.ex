@@ -12,4 +12,8 @@ defmodule UploadcareEx do
   def upload_url(url) do
     GenServer.call(Server, {:upload_url, url})
   end
+
+  def request(url, http_method, data \\ "", headers \\ %{}) do
+    GenServer.call(Server, {:request, url, http_method, data, headers})
+  end
 end

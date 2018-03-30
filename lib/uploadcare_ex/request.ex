@@ -20,7 +20,7 @@ defmodule UploadcareEx.Request do
   @spec parse_body(binary()) :: map() | binary()
   defp parse_body(body) do
     try do
-      body |> Poison.decode!
+      body |> Poison.decode!()
     rescue
       JsonError -> body
     end

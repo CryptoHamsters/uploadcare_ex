@@ -15,4 +15,10 @@ defmodule UploadcareEx.Server do
 
     {:reply, result, state}
   end
+
+  def handle_call({:request, url, http_method, data, headers}, _, state) do
+    result = url |> Impl.request(http_method, data, headers)
+
+    {:reply, result, state}
+  end
 end
