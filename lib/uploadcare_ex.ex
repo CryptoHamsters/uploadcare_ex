@@ -1,18 +1,15 @@
 defmodule UploadcareEx do
-  @moduledoc """
-  Documentation for UploadcareEx.
-  """
+  use Application
 
-  @doc """
-  Hello world.
+  alias UploadcareEx.Server
 
-  ## Examples
+  def start(_type, _args) do
+    children = [Server]
 
-      iex> UploadcareEx.hello
-      :world
+    Supervisor.start_link(children, strategy: :one_for_one)
+  end
 
-  """
-  def hello do
-    :world
+  def upload_url(url) do
+    GenServer.call(Server, {:upload_url, url})
   end
 end

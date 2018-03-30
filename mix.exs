@@ -13,6 +13,7 @@ defmodule UploadcareEx.MixProject do
 
   def application do
     [
+      mod: {UploadcareEx, []},
       extra_applications: [:logger]
     ]
   end
