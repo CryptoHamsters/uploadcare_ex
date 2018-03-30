@@ -39,18 +39,19 @@ jobs:
       - run: mix format --check-formatted
       - run: mix test
 
-      - restore_cache:
-          keys:
-            - v3-plt-cache-{{ arch }}-{{ checksum "mix.lock" }}
-            - v3-plt-cache-{{ arch }}
-            - v3-plt-cache
+      # https://github.com/safwank/ElixirRetry/issues/17
+      # - restore_cache:
+      #     keys:
+      #       - v3-plt-cache-{{ arch }}-{{ checksum "mix.lock" }}
+      #       - v3-plt-cache-{{ arch }}
+      #       - v3-plt-cache
 
-      - run: mix dialyzer --plt
+      # - run: mix dialyzer --plt
 
-      - save_cache:
-          key: v3-plt-cache-{{ arch }}-{{ checksum "mix.lock" }}
-          paths:
-            - _build
-            - ~/.mix
+      # - save_cache:
+      #     key: v3-plt-cache-{{ arch }}-{{ checksum "mix.lock" }}
+      #     paths:
+      #       - _build
+      #       - ~/.mix
 
-      - run: mix dialyzer --halt-exit-status
+      # - run: mix dialyzer --halt-exit-status

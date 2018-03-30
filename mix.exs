@@ -22,6 +22,7 @@ defmodule UploadcareEx.MixProject do
     [
       {:httpoison, "~> 1.0"},
       {:poison, "~> 3.1"},
+      {:retry, "~> 0.8"},
       {:exvcr, "~> 0.10", only: :test},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:credo, "~> 0.9.0-rc1", only: [:dev, :test], runtime: false}
