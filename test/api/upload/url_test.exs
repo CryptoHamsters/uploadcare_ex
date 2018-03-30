@@ -1,7 +1,7 @@
-defmodule UploadcareEx.Upload.UrlTest do
+defmodule UploadcareEx.API.Upload.UrlTest do
   use ExUnit.Case, async: true
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
-  alias UploadcareEx.Upload
+  alias UploadcareEx.API.Upload
 
   setup_all do
     HTTPoison.start()
