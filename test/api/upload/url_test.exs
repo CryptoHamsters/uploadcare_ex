@@ -1,7 +1,7 @@
 defmodule UploadcareEx.API.Upload.UrlTest do
   use ExUnit.Case, async: true
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
-  alias UploadcareEx.API.Upload
+  alias UploadcareEx.API.Upload.Url
 
   setup_all do
     HTTPoison.start()
@@ -35,7 +35,7 @@ defmodule UploadcareEx.API.Upload.UrlTest do
            "status" => "success",
            "total" => 327_948,
            "uuid" => "172cc9ec-f418-410c-9c95-b813a27caf88"
-         }} = test_url |> Upload.upload_url()
+         }} = test_url |> Url.upload()
       end
     end
 
@@ -44,7 +44,7 @@ defmodule UploadcareEx.API.Upload.UrlTest do
         test_url = "https://google.com"
 
         {:error, %{body: %{"status" => "unknown"}, status_code: 200}} =
-          test_url |> Upload.upload_url()
+          test_url |> Url.upload()
       end
     end
   end

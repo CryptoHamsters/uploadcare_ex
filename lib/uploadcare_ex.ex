@@ -9,11 +9,15 @@ defmodule UploadcareEx do
     Supervisor.start_link(children, strategy: :one_for_one)
   end
 
+  def request(url, http_method, data \\ "", headers \\ %{}) do
+    GenServer.call(Server, {:request, url, http_method, data, headers})
+  end
+
   def upload_url(url) do
     GenServer.call(Server, {:upload_url, url})
   end
 
-  def request(url, http_method, data \\ "", headers \\ %{}) do
-    GenServer.call(Server, {:request, url, http_method, data, headers})
+  def upload_file(file_path) do
+    GenServer.call(Server, {:upload_file, file_path})
   end
 end

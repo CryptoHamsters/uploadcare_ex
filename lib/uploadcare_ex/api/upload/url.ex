@@ -1,6 +1,5 @@
 defmodule UploadcareEx.API.Upload.Url do
-  alias UploadcareEx.Request
-  alias UploadcareEx.Config
+  alias UploadcareEx.{Request, Config}
 
   @base_url "https://upload.uploadcare.com/from_url/"
 

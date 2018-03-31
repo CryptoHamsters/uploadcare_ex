@@ -1,0 +1,19 @@
+[
+  {
+    "request": {
+      "body": "{:multipart, [{\"UPLOADCARE_PUB_KEY\", \"3f5c4ce6fcdaf7aeace8\"}, {\"UPLOADCARE_STORE\", \"0\"}, {:file, \"/Users/ayrat/Development/uploadcare_ex/wrong.png\"}]}",
+      "headers": [],
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://upload.uploadcare.com/base/"
+    },
+    "response": {
+      "binary": false,
+      "body": "enoent",
+      "headers": [],
+      "status_code": null,
+      "type": "error"
+    }
+  }
+]
