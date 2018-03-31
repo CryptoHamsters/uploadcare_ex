@@ -1,45 +1,32 @@
 defmodule UploadcareEx do
-  use Application
-
-  alias UploadcareEx.Server
-  alias UploadcareEx.API.Behaviour, as: ApiBehaviour
   alias UploadcareEx.Request
+  alias UploadcareEx.API.Behaviour, as: ApiBehaviour
+  alias UploadcareEx.API.Upload, as: UploadApi
+  alias UploadcareEx.API.Files, as: FilesApi
 
   @behaviour ApiBehaviour
 
-  def start(_type, _args) do
-    children = [Server]
-
-    Supervisor.start_link(children, strategy: :one_for_one)
-  end
-
   @spec request(binary(), atom(), any(), map()) :: Request.response()
-  def request(url, http_method, data \\ "", headers \\ %{}) do
-    GenServer.call(Server, {:request, url, http_method, data, headers})
-  end
+  defdelegate request(url, http_method, data \\ "", headers \\ %{}), to: UploadcareEx.Request
 
   @spec upload_url(binary()) :: {:ok, map()} | {:error, Request.response()}
-  def upload_url(url) do
-    GenServer.call(Server, {:upload_url, url})
-  end
+  defdelegate upload_url(url), to: UploadApi
 
   @spec upload_file(binary()) :: {:ok, binary()} | {:error, Request.response()}
-  def upload_file(file_path) do
-    GenServer.call(Server, {:upload_file, file_path})
-  end
+  defdelegate upload_file(file_path), to: UploadApi
 
   @spec file_info(binary()) :: {:ok, map()} | {:error, Request.response()}
   def file_info(uuid) do
-    GenServer.call(Server, {:file_info, uuid})
+    uuid |> FilesApi.info()
   end
 
   @spec file_store(binary()) :: {:ok, map()} | {:error, Request.response()}
   def file_store(uuid) do
-    GenServer.call(Server, {:file_store, uuid})
+    uuid |> FilesApi.store()
   end
 
   @spec file_delete(binary()) :: :ok | {:error, Request.response()}
   def file_delete(uuid) do
-    GenServer.call(Server, {:file_delete, uuid})
+    uuid |> FilesApi.delete()
   end
 end
