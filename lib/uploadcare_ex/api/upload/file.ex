@@ -1,5 +1,6 @@
 defmodule UploadcareEx.API.Upload.File do
   alias UploadcareEx.{Request, Config}
+  import UploadcareEx.API.Urls
 
   @spec upload(binary()) :: {:ok, binary()} | {:error, Request.response()}
   def upload(file_path) do
@@ -10,7 +11,7 @@ defmodule UploadcareEx.API.Upload.File do
   defp upload_file(file_path) do
     form = file_path |> upload_form()
 
-    case upload_url() |> Request.request(:post, form) do
+    case base_upload_url() |> Request.request(:post, form) do
       %{body: %{"file" => file_uuid}, status_code: 200} -> {:ok, file_uuid}
       other -> {:error, other}
     end
@@ -28,8 +29,8 @@ defmodule UploadcareEx.API.Upload.File do
     }
   end
 
-  @spec upload_url() :: binary()
-  def upload_url do
-    Config.upload_url() <> "/base/"
+  @spec base_upload_url() :: binary()
+  def base_upload_url do
+    upload_url() <> "/base/"
   end
 end

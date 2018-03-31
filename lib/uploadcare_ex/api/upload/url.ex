@@ -1,4 +1,6 @@
 defmodule UploadcareEx.API.Upload.Url do
+  import UploadcareEx.API.Urls
+
   alias UploadcareEx.{Request, Config}
 
   @spec upload(binary()) :: {:ok, map()} | {:error, Request.response()}
@@ -11,7 +13,7 @@ defmodule UploadcareEx.API.Upload.Url do
 
   @spec try_to_upload(binary()) :: {:ok, binary()} | {:error, Request.response()}
   def try_to_upload(url) do
-    url_with_params = url |> upload_url()
+    url_with_params = url |> base_upload_url()
 
     case url_with_params |> Request.request(:get) do
       %{status_code: 200, body: %{"token" => token}} -> {:ok, token}
@@ -29,8 +31,8 @@ defmodule UploadcareEx.API.Upload.Url do
     end
   end
 
-  @spec upload_url(binary()) :: binary()
-  defp upload_url(url) do
+  @spec base_upload_url(binary()) :: binary()
+  defp base_upload_url(url) do
     params = url |> upload_params()
 
     base_url() <> "?#{params}"
@@ -43,7 +45,7 @@ defmodule UploadcareEx.API.Upload.Url do
 
   @spec base_url() :: binary()
   defp base_url do
-    Config.upload_url() <> "/from_url/"
+    upload_url() <> "/from_url/"
   end
 
   @spec upload_params(binary()) :: binary()

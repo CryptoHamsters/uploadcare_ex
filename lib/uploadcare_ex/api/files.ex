@@ -1,6 +1,8 @@
 defmodule UploadcareEx.API.Files do
+  import UploadcareEx.API.Urls
+
   alias UploadcareEx.API.Auth
-  alias UploadcareEx.{Request, Config}
+  alias UploadcareEx.Request
 
   @spec info(binary()) :: {:ok, map()} | {:error, Request.response()}
   def info(uuid) do
@@ -34,7 +36,7 @@ defmodule UploadcareEx.API.Files do
 
   @spec base_url() :: binary()
   defp base_url do
-    Config.api_url() <> "/files/"
+    api_url() <> "/files/"
   end
 
   @spec auth_headers :: map()
