@@ -4,7 +4,6 @@ defmodule UploadcareEx.Request do
   alias Poison.SyntaxError, as: JsonError
 
   @type response :: %{status_code: number(), body: map() | binary()}
-  @dialyzer {:no_return, request_with_retries: 4}
 
   @spec request(binary(), atom(), any(), map()) :: response()
   def request(url, http_method, data \\ "", headers \\ %{}) do

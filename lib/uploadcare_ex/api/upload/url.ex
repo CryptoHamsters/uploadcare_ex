@@ -1,8 +1,6 @@
 defmodule UploadcareEx.API.Upload.Url do
   alias UploadcareEx.{Request, Config}
 
-  @base_url "https://upload.uploadcare.com/from_url/"
-
   @spec upload(binary()) :: {:ok, map()} | {:error, Request.response()}
   def upload(url) do
     with {:ok, token} <- url |> try_to_upload(),
@@ -35,12 +33,17 @@ defmodule UploadcareEx.API.Upload.Url do
   defp upload_url(url) do
     params = url |> upload_params()
 
-    @base_url <> "?#{params}"
+    base_url() <> "?#{params}"
   end
 
   @spec status_url(binary()) :: binary()
   defp status_url(token) do
-    @base_url <> "status/?token=#{token}"
+    base_url() <> "status/?token=#{token}"
+  end
+
+  @spec base_url() :: binary()
+  defp base_url do
+    Config.upload_url() <> "/from_url/"
   end
 
   @spec upload_params(binary()) :: binary()

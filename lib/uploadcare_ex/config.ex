@@ -1,6 +1,16 @@
 defmodule UploadcareEx.Config do
   @moduledoc false
 
+  @spec api_url() :: binary()
+  def api_url do
+    get_env_var!(:api_url)
+  end
+
+  @spec upload_url() :: binary()
+  def upload_url do
+    get_env_var!(:upload_url)
+  end
+
   @spec public_key() :: binary()
   def public_key do
     get_env_var!(:public_key)
