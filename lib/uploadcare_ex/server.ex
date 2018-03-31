@@ -27,4 +27,22 @@ defmodule UploadcareEx.Server do
 
     {:reply, result, state}
   end
+
+  def handle_call({:file_info, uuid}, _, state) do
+    result = uuid |> Impl.file_info()
+
+    {:reply, result, state}
+  end
+
+  def handle_call({:file_store, uuid}, _, state) do
+    result = uuid |> Impl.file_store()
+
+    {:reply, result, state}
+  end
+
+  def handle_call({:file_delete, uuid}, _, state) do
+    result = uuid |> Impl.file_delete()
+
+    {:reply, result, state}
+  end
 end
