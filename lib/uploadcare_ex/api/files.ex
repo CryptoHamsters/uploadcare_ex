@@ -4,7 +4,7 @@ defmodule UploadcareEx.API.Files do
 
   @spec info(binary()) :: {:ok, map()} | {:error, Request.response()}
   def info(uuid) do
-    info_url = api_url() <> "/files/#{uuid}/"
+    info_url = base_url() <> "#{uuid}/"
 
     case info_url |> Request.request(:get, "", auth_headers()) do
       %{body: body, status_code: 200} -> {:ok, body}
@@ -12,13 +12,23 @@ defmodule UploadcareEx.API.Files do
     end
   end
 
+  @spec store(binary()) :: {:ok, map()} | {:error, Request.response()}
+  def store(uuid) do
+    store_url = base_url() <> "#{uuid}/storage/"
+
+    case store_url |> Request.request(:put, "", auth_headers()) do
+      %{body: body, status_code: 200} -> {:ok, body}
+      other -> {:error, other}
+    end
+  end
+
+  @spec base_url() :: binary()
+  defp base_url do
+    Config.api_url() <> "/files/"
+  end
+
   @spec auth_headers :: map()
   defp auth_headers do
     Auth.simple_auth_headers()
-  end
-
-  @spec api_url() :: binary()
-  defp api_url do
-    Config.api_url()
   end
 end

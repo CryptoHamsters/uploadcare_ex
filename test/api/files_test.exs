@@ -23,4 +23,21 @@ defmodule UploadcareEx.API.FilesTest do
       end
     end
   end
+
+  describe "store/1" do
+    test "stores file" do
+      use_cassette "files_store_success" do
+        {:ok, %{}} = "172cc9ec-f418-410c-9c95-b813a27caf88" |> Files.store()
+      end
+    end
+
+    test "failes to store file" do
+      use_cassette "files_store_failure" do
+        {
+          :error,
+          %{body: %{"detail" => "Not found."}, status_code: 404}
+        } = "wrong" |> Files.store()
+      end
+    end
+  end
 end
