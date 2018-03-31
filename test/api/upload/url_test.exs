@@ -43,8 +43,7 @@ defmodule UploadcareEx.API.Upload.UrlTest do
       use_cassette "url_upload_failure" do
         test_url = "https://google.com"
 
-        {:error, %{body: %{"status" => "unknown"}, status_code: 200}} =
-          test_url |> Url.upload()
+        {:error, %{body: %{"status" => "unknown"}, status_code: 200}} = test_url |> Url.upload()
       end
     end
   end

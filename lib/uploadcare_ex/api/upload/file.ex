@@ -23,8 +23,8 @@ defmodule UploadcareEx.API.Upload.File do
     {
       :multipart,
       [
-        {"UPLOADCARE_PUB_KEY", Config.public_key},
-        {"UPLOADCARE_STORE", Config.store},
+        {"UPLOADCARE_PUB_KEY", Config.public_key()},
+        {"UPLOADCARE_STORE", Config.store()},
         {:file, file_path}
       ]
     }
