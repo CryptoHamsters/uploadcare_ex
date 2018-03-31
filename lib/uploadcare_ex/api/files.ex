@@ -22,6 +22,16 @@ defmodule UploadcareEx.API.Files do
     end
   end
 
+  @spec delete(binary()) :: :ok | {:error, Request.response()}
+  def delete(uuid) do
+    delete_url = base_url() <> "#{uuid}/storage/"
+
+    case delete_url |> Request.request(:delete, "", auth_headers()) do
+      %{status_code: 302} -> :ok
+      other -> {:error, other}
+    end
+  end
+
   @spec base_url() :: binary()
   defp base_url do
     Config.api_url() <> "/files/"

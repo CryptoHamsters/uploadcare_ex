@@ -40,4 +40,21 @@ defmodule UploadcareEx.API.FilesTest do
       end
     end
   end
+
+  describe "delete/1" do
+    test "deletes file" do
+      use_cassette "files_delete_success" do
+        :ok = "172cc9ec-f418-410c-9c95-b813a27caf88" |> Files.delete()
+      end
+    end
+
+    test "failes to delete file" do
+      use_cassette "files_delete_failure" do
+        {
+          :error,
+          %{body: %{"detail" => "Not found."}, status_code: 404}
+        } = "wrong" |> Files.delete()
+      end
+    end
+  end
 end
