@@ -1,0 +1,35 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/vnd.uploadcare-v0.5+json",
+        "Authorization": "Uploadcare.Simple 3f5c4ce6fcdaf7aeace8:06aa7fca4eee96801cc4"
+      },
+      "method": "delete",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.uploadcare.com/files/172cc9ec-f418-410c-9c95-b813a27caf88/storage/"
+    },
+    "response": {
+      "binary": false,
+      "body": "",
+      "headers": {
+        "Date": "Sat, 31 Mar 2018 10:30:13 GMT",
+        "Content-Type": "text/html; charset=utf-8",
+        "Content-Length": "0",
+        "Connection": "keep-alive",
+        "Server": "nginx",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Vary": "Accept",
+        "Location": "/files/172cc9ec-f418-410c-9c95-b813a27caf88/",
+        "Allow": "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS",
+        "Access-Control-Allow-Origin": "https://uploadcare.com",
+        "X-Frame-Options": "SAMEORIGIN"
+      },
+      "status_code": 302,
+      "type": "ok"
+    }
+  }
+]

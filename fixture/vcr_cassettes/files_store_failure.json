@@ -1,0 +1,34 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/vnd.uploadcare-v0.5+json",
+        "Authorization": "Uploadcare.Simple 3f5c4ce6fcdaf7aeace8:06aa7fca4eee96801cc4"
+      },
+      "method": "put",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.uploadcare.com/files/wrong/storage/"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"detail\":\"Not found.\"}",
+      "headers": {
+        "Date": "Sat, 31 Mar 2018 10:26:58 GMT",
+        "Content-Type": "application/vnd.uploadcare-v0.5+json",
+        "Content-Length": "23",
+        "Connection": "keep-alive",
+        "Server": "nginx",
+        "X-XSS-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Vary": "Accept",
+        "Allow": "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS",
+        "Access-Control-Allow-Origin": "https://uploadcare.com",
+        "X-Frame-Options": "SAMEORIGIN"
+      },
+      "status_code": 404,
+      "type": "ok"
+    }
+  }
+]
