@@ -8,7 +8,7 @@ defmodule UploadcareEx do
   @type response :: %{status_code: number(), body: map() | binary()}
 
   @moduledoc """
-  Elixir wrapper for Uplodcare API.
+  Elixir wrapper for Uploadcare API.
   """
 
   @doc """
@@ -93,7 +93,6 @@ defmodule UploadcareEx do
          ...
         }
       }
-
 
       iex> UploadcareEx.file_info("wrong")
       {:error, %{body: %{"detail" => "Not found."}, status_code: 404}}

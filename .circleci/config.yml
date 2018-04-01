@@ -36,6 +36,7 @@ jobs:
             - deps
             - ~/.mix
 
+      - run: mix credo
       - run: mix format --check-formatted
       - run: mix test
 

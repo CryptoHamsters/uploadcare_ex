@@ -1,5 +1,8 @@
 defmodule UploadcareEx.Config do
   @moduledoc """
+
+  Configuration
+
   ### Required parameters:
 
   ```

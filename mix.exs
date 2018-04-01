@@ -4,9 +4,9 @@ defmodule UploadcareEx.MixProject do
   def project do
     [
       app: :uploadcare_ex,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.6",
-      description: "Elixir wrapper for Uplodcare API",
+      description: "Elixir wrapper for Uploadcare API",
       package: [
         maintainers: ["Ayrat Badykov"],
         licenses: ["MIT"],
