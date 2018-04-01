@@ -1,6 +1,8 @@
 defmodule UploadcareEx.API.Auth do
   alias UploadcareEx.Config
 
+  @moduledoc false
+
   @spec simple_auth_headers() :: map()
   def simple_auth_headers do
     %{

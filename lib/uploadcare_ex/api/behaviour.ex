@@ -1,6 +1,8 @@
 defmodule UploadcareEx.API.Behaviour do
   alias UploadcareEx.Request
 
+  @moduledoc false
+
   @callback request(binary(), atom(), any(), map()) :: {:ok, Request.response()} | {:error, any()}
   @callback upload_url(binary()) :: {:ok, map()} | {:error, any()}
   @callback upload_file(binary()) :: {:ok, binary()} | {:error, any()}

@@ -2,6 +2,8 @@ defmodule UploadcareEx.API.Upload.File do
   alias UploadcareEx.{Request, Config}
   import UploadcareEx.API.Urls
 
+  @moduledoc false
+
   @spec upload(binary()) :: {:ok, binary()} | {:error, any()}
   def upload(file_path) do
     file_path |> upload_file

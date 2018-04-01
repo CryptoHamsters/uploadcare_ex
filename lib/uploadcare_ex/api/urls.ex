@@ -1,4 +1,6 @@
 defmodule UploadcareEx.API.Urls do
+  @moduledoc false
+
   @upload_url "https://upload.uploadcare.com"
   @api_url "https://api.uploadcare.com"
 

@@ -1,5 +1,28 @@
 defmodule UploadcareEx.Config do
-  @moduledoc false
+  @moduledoc """
+  ### Required parameters:
+
+  ```
+  config :uploadcare_ex,
+    public_key: "public_key",
+    private_key: "private_key",
+    accept_header: "application/vnd.uploadcare-v0.5+json"
+  ```
+
+  By default [Uploadcare.Simple auth-scheme](https://uploadcare.com/docs/api_reference/rest/requests_auth/) is used.
+
+  ### Optional parameters
+
+  ```
+  config :uploadcare_ex,
+    ...
+    store: "0",
+    retry_period: 1_000,
+    retry_expiry: 5_000
+  ```
+
+  ```retry_period``` and ```retry_expiry``` parameters are used for request retries in case of Uploadcare service server errors. Their default values are 1_000 and 5_000 respectively.
+  """
 
   @spec public_key() :: binary()
   def public_key do
@@ -18,17 +41,17 @@ defmodule UploadcareEx.Config do
 
   @spec store() :: binary()
   def store do
-    get_env_var!(:store)
+    Application.get_env(:uploadcare_ex, :store) || "0"
   end
 
   @spec retry_period() :: number()
   def retry_period do
-    get_env_var!(:retry_period)
+    Application.get_env(:uploadcare_ex, :retry_period) || 1_000
   end
 
   @spec retry_expiry() :: number()
   def retry_expiry do
-    get_env_var!(:retry_expiry)
+    Application.get_env(:uploadcare_ex, :retry_expiry) || 5_000
   end
 
   @spec get_env_var!(atom()) :: binary() | number()

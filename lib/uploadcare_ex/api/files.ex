@@ -1,6 +1,8 @@
 defmodule UploadcareEx.API.Files do
   import UploadcareEx.API.Urls
 
+  @moduledoc false
+
   alias UploadcareEx.API.Auth
   alias UploadcareEx.Request
 
@@ -33,7 +35,7 @@ defmodule UploadcareEx.API.Files do
     case delete_url |> Request.request(:delete, "", auth_headers()) do
       {:ok, %{status_code: 302}} -> :ok
       {:ok, response} -> {:error, response}
-      other -> {:error, other}
+      other -> other
     end
   end
 

@@ -1,6 +1,8 @@
 defmodule UploadcareEx.API.Upload.Url do
   import UploadcareEx.API.Urls
 
+  @moduledoc false
+
   alias UploadcareEx.{Request, Config}
 
   @spec upload(binary()) :: {:ok, map()} | {:error, any()}

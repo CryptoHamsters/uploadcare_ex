@@ -1,6 +1,8 @@
 defmodule UploadcareEx.Request do
   use Retry
 
+  @moduledoc false
+
   import UploadcareEx.Config
 
   alias Poison.SyntaxError, as: JsonError

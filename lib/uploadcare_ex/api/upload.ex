@@ -2,6 +2,8 @@ defmodule UploadcareEx.API.Upload do
   alias UploadcareEx.API.Upload.{Url, File}
   alias UploadcareEx.Request
 
+  @moduledoc false
+
   @spec upload_url(binary()) :: {:ok, map()} | {:error, Request.response()}
   def upload_url(url) do
     url |> Url.upload()
