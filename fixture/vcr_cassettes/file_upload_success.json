@@ -1,0 +1,33 @@
+[
+  {
+    "request": {
+      "body": "{:multipart, [{\"UPLOADCARE_PUB_KEY\", \"3f5c4ce6fcdaf7aeace8\"}, {\"UPLOADCARE_STORE\", \"0\"}, {:file, \"/Users/ayrat/Development/uploadcare_ex/test/test_files/test.png\"}]}",
+      "headers": [],
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://upload.uploadcare.com/base/"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"file\":\"92a1377f-ef49-4102-b118-84b008bc3502\"}",
+      "headers": {
+        "Date": "Sat, 31 Mar 2018 07:15:20 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "47",
+        "Connection": "keep-alive",
+        "Server": "nginx",
+        "Vary": "Accept-Encoding",
+        "Access-Control-Allow-Headers": "X-PINGOTHER, DNT",
+        "X-Content-Type-Options": "nosniff",
+        "Access-Control-Max-Age": "1",
+        "X-XSS-Protection": "1; mode=block",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

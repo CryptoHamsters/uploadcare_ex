@@ -1,18 +1,32 @@
 defmodule UploadcareEx do
-  @moduledoc """
-  Documentation for UploadcareEx.
-  """
+  alias UploadcareEx.Request
+  alias UploadcareEx.API.Behaviour, as: ApiBehaviour
+  alias UploadcareEx.API.Upload, as: UploadApi
+  alias UploadcareEx.API.Files, as: FilesApi
 
-  @doc """
-  Hello world.
+  @behaviour ApiBehaviour
 
-  ## Examples
+  @spec request(binary(), atom(), any(), map()) :: {:ok, Request.response()} | {:error, any()}
+  defdelegate request(url, http_method, data \\ "", headers \\ %{}), to: Request
 
-      iex> UploadcareEx.hello
-      :world
+  @spec upload_url(binary()) :: {:ok, map()} | {:error, any()}
+  defdelegate upload_url(url), to: UploadApi
 
-  """
-  def hello do
-    :world
+  @spec upload_file(binary()) :: {:ok, binary()} | {:error, any()}
+  defdelegate upload_file(file_path), to: UploadApi
+
+  @spec file_info(binary()) :: {:ok, map()} | {:error, any()}
+  def file_info(uuid) do
+    uuid |> FilesApi.info()
+  end
+
+  @spec file_store(binary()) :: {:ok, map()} | {:error, any()}
+  def file_store(uuid) do
+    uuid |> FilesApi.store()
+  end
+
+  @spec file_delete(binary()) :: :ok | {:error, any()}
+  def file_delete(uuid) do
+    uuid |> FilesApi.delete()
   end
 end

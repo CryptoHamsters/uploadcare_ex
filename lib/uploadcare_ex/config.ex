@@ -21,10 +21,20 @@ defmodule UploadcareEx.Config do
     get_env_var!(:store)
   end
 
-  @spec get_env_var!(atom()) :: binary()
+  @spec retry_period() :: number()
+  def retry_period do
+    get_env_var!(:retry_period)
+  end
+
+  @spec retry_expiry() :: number()
+  def retry_expiry do
+    get_env_var!(:retry_expiry)
+  end
+
+  @spec get_env_var!(atom()) :: binary() | number()
   defp get_env_var!(key) do
     case Application.get_env(:uploadcare_ex, key) do
-      value when is_binary(value) and value != "" ->
+      value when value != "" ->
         value
 
       els ->
