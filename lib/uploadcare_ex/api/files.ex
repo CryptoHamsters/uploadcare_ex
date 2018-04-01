@@ -9,8 +9,9 @@ defmodule UploadcareEx.API.Files do
     info_url = base_url() <> "#{uuid}/"
 
     case info_url |> Request.request(:get, "", auth_headers()) do
-      %{body: body, status_code: 200} -> {:ok, body}
-      other -> {:error, other}
+      {:ok, %{body: body, status_code: 200}} -> {:ok, body}
+      {:ok, response} -> {:error, response}
+      other -> other
     end
   end
 
@@ -19,8 +20,9 @@ defmodule UploadcareEx.API.Files do
     store_url = base_url() <> "#{uuid}/storage/"
 
     case store_url |> Request.request(:put, "", auth_headers()) do
-      %{body: body, status_code: 200} -> {:ok, body}
-      other -> {:error, other}
+      {:ok, %{body: body, status_code: 200}} -> {:ok, body}
+      {:ok, response} -> {:error, response}
+      other -> other
     end
   end
 
@@ -29,7 +31,8 @@ defmodule UploadcareEx.API.Files do
     delete_url = base_url() <> "#{uuid}/storage/"
 
     case delete_url |> Request.request(:delete, "", auth_headers()) do
-      %{status_code: 302} -> :ok
+      {:ok, %{status_code: 302}} -> :ok
+      {:ok, response} -> {:error, response}
       other -> {:error, other}
     end
   end

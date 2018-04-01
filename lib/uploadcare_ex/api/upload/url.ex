@@ -3,7 +3,7 @@ defmodule UploadcareEx.API.Upload.Url do
 
   alias UploadcareEx.{Request, Config}
 
-  @spec upload(binary()) :: {:ok, map()} | {:error, Request.response()}
+  @spec upload(binary()) :: {:ok, map()} | {:error, any()}
   def upload(url) do
     with {:ok, token} <- url |> try_to_upload(),
          {:ok, result} <- token |> check_token_status() do
@@ -11,13 +11,14 @@ defmodule UploadcareEx.API.Upload.Url do
     end
   end
 
-  @spec try_to_upload(binary()) :: {:ok, binary()} | {:error, Request.response()}
+  @spec try_to_upload(binary()) :: {:ok, binary()} | {:error, any()}
   def try_to_upload(url) do
     url_with_params = url |> base_upload_url()
 
     case url_with_params |> Request.request(:get) do
-      %{status_code: 200, body: %{"token" => token}} -> {:ok, token}
-      other -> {:error, other}
+      {:ok, %{body: %{"token" => token}, status_code: 200}} -> {:ok, token}
+      {:ok, response} -> {:error, response}
+      other -> other
     end
   end
 
@@ -26,8 +27,9 @@ defmodule UploadcareEx.API.Upload.Url do
     url = token |> status_url()
 
     case url |> Request.request(:get) do
-      %{status_code: 200, body: %{"status" => "success"} = resp} -> {:ok, resp}
-      other -> {:error, other}
+      {:ok, %{status_code: 200, body: %{"status" => "success"} = resp}} -> {:ok, resp}
+      {:ok, response} -> {:error, response}
+      other -> other
     end
   end
 

@@ -6,26 +6,26 @@ defmodule UploadcareEx do
 
   @behaviour ApiBehaviour
 
-  @spec request(binary(), atom(), any(), map()) :: Request.response()
-  defdelegate request(url, http_method, data \\ "", headers \\ %{}), to: UploadcareEx.Request
+  @spec request(binary(), atom(), any(), map()) :: {:ok, Request.response()} | {:error, any()}
+  defdelegate request(url, http_method, data \\ "", headers \\ %{}), to: Request
 
-  @spec upload_url(binary()) :: {:ok, map()} | {:error, Request.response()}
+  @spec upload_url(binary()) :: {:ok, map()} | {:error, any()}
   defdelegate upload_url(url), to: UploadApi
 
-  @spec upload_file(binary()) :: {:ok, binary()} | {:error, Request.response()}
+  @spec upload_file(binary()) :: {:ok, binary()} | {:error, any()}
   defdelegate upload_file(file_path), to: UploadApi
 
-  @spec file_info(binary()) :: {:ok, map()} | {:error, Request.response()}
+  @spec file_info(binary()) :: {:ok, map()} | {:error, any()}
   def file_info(uuid) do
     uuid |> FilesApi.info()
   end
 
-  @spec file_store(binary()) :: {:ok, map()} | {:error, Request.response()}
+  @spec file_store(binary()) :: {:ok, map()} | {:error, any()}
   def file_store(uuid) do
     uuid |> FilesApi.store()
   end
 
-  @spec file_delete(binary()) :: :ok | {:error, Request.response()}
+  @spec file_delete(binary()) :: :ok | {:error, any()}
   def file_delete(uuid) do
     uuid |> FilesApi.delete()
   end

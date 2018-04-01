@@ -22,7 +22,7 @@ defmodule UploadcareEx.API.Upload.FileTest do
 
         {
           :error,
-          {:error, %HTTPoison.Error{id: nil, reason: "enoent"}}
+          %HTTPoison.Error{id: nil, reason: "enoent"}
         } = path |> File.upload()
       end
     end
