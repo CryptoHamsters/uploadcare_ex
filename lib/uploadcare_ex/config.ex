@@ -8,8 +8,7 @@ defmodule UploadcareEx.Config do
   ```
   config :uploadcare_ex,
     public_key: "public_key",
-    private_key: "private_key",
-    accept_header: "application/vnd.uploadcare-v0.5+json"
+    private_key: "private_key"
   ```
 
   By default [Uploadcare.Simple auth-scheme](https://uploadcare.com/docs/api_reference/rest/requests_auth/) is used.
@@ -19,6 +18,7 @@ defmodule UploadcareEx.Config do
   ```
   config :uploadcare_ex,
     ...
+    accept_header: "application/vnd.uploadcare-v0.5+json",
     store: "0",
     retry_period: 1_000,
     retry_expiry: 5_000
@@ -39,7 +39,7 @@ defmodule UploadcareEx.Config do
 
   @spec accept_header() :: binary()
   def accept_header do
-    get_env_var!(:accept_header)
+    Application.get_env(:uploadcare_ex, :accept_header) || "application/vnd.uploadcare-v0.5+json"
   end
 
   @spec store() :: binary()
