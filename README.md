@@ -9,7 +9,7 @@ The package can be installed by adding `uploadcare_ex` to your list of dependenc
 ```elixir
 def deps do
   [
-    {:uploadcare_ex, "~> 0.1.1"}
+    {:uploadcare_ex, "~> 0.1.2"}
   ]
 end
 ```

@@ -56,7 +56,8 @@ defmodule UploadcareEx.API.Upload.Url do
   defp upload_params(url) do
     [
       pub_key: Config.public_key(),
-      source_url: url
+      source_url: url,
+      store: Config.store()
     ]
     |> URI.encode_query()
   end
