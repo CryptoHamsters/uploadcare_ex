@@ -52,7 +52,6 @@ defmodule UploadcareEx do
       }
 
       iex> UploadcareEx.upload_url("https://google.com")
-      "https://upload.uploadcare.com/from_url/status/?token=fcad48ae-6be6-4d0b-8543-8cc7703d2b71"
       {:error,
        %{
          body: %{
