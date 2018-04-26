@@ -4,11 +4,11 @@ defmodule UploadcareEx.MixProject do
   def project do
     [
       app: :uploadcare_ex,
-      version: "0.1.2",
+      version: "0.1.3",
       elixir: "~> 1.6",
       description: "Elixir wrapper for Uploadcare API",
       package: [
-        maintainers: ["Ayrat Badykov"],
+        maintainers: ["Ayrat Badykov", "Vitali Kharevich"],
         licenses: ["MIT"],
         links: %{"GitHub" => "https://github.com/CryptoHamsters/uploadcare_ex"}
       ],

@@ -57,6 +57,16 @@ defmodule UploadcareEx.Config do
     Application.get_env(:uploadcare_ex, :retry_expiry) || 5_000
   end
 
+  @spec upload_url_retry_period() :: number()
+  def upload_url_retry_period do
+    Application.get_env(:uploadcare_ex, :upload_url_retry_period) || 300
+  end
+
+  @spec upload_url_retry_expiry() :: number()
+  def upload_url_retry_expiry do
+    Application.get_env(:uploadcare_ex, :upload_url_retry_expiry) || 20_000
+  end
+
   @spec get_env_var!(atom()) :: binary() | number()
   defp get_env_var!(key) do
     case Application.get_env(:uploadcare_ex, key) do
