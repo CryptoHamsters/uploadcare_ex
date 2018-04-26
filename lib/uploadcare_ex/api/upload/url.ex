@@ -1,4 +1,6 @@
 defmodule UploadcareEx.API.Upload.Url do
+  use Retry
+
   import UploadcareEx.API.Urls
 
   @moduledoc false
@@ -27,11 +29,21 @@ defmodule UploadcareEx.API.Upload.Url do
   @spec check_token_status(binary()) :: {:ok, map()} | {:error, Request.response()}
   def check_token_status(token) do
     url = token |> status_url()
+    retry_period = Config.upload_url_retry_period()
+    retry_expiry = Config.upload_url_retry_expiry()
 
-    case url |> Request.request(:get) do
-      {:ok, %{status_code: 200, body: %{"status" => "success"} = resp}} -> {:ok, resp}
-      {:ok, response} -> {:error, response}
-      other -> other
+    retry_while with: exp_backoff() |> randomize() |> cap(retry_period) |> expiry(retry_expiry) do
+      case url |> Request.request(:get) do
+        {:ok, %{status_code: 200, body: %{"status" => "success"} = resp}} ->
+          {:halt, {:ok, resp}}
+
+        # если uploadcare не успел обработать запрос, повторяем запрос с задержкой
+        {:ok, %{status_code: 200, body: %{"status" => "unknown"}} = resp} ->
+          {:cont, {:error, resp}}
+
+        other ->
+          {:halt, other}
+      end
     end
   end
 
