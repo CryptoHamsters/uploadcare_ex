@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - checkout
-
+      - run: echo "$OTP_VERSION-$ELIXIR_VERSION" > otp-and-elixir.version
       - restore_cache:
           keys:
-            - v3-dependency-cache-{{ arch }}-{{ checksum "mix.lock" }}
-            - v3-dependency-cache-{{ arch }}
-            - v3-dependency-cache
+            - v4-dependency-cache-{{ arch }}-{{ checksum "mix.lock" }}-{{ checksum "otp-and-elixir.version" }}
+            - v4-dependency-cache-{{ arch }}
+            - v4-dependency-cache
 
       - run: mix local.rebar --force
       - run: mix local.hex --force
@@ -30,7 +30,7 @@ jobs:
             MIX_ENV: test
 
       - save_cache:
-          key: v3-dependency-cache-{{ arch }}-{{ checksum "mix.lock" }}
+          key: v4-dependency-cache-{{ arch }}-{{ checksum "mix.lock" }}-{{ checksum "otp-and-elixir.version" }}
           paths:
             - _build
             - deps
@@ -42,14 +42,14 @@ jobs:
 
       - restore_cache:
           keys:
-            - v3-plt-cache-{{ arch }}-{{ checksum "mix.lock" }}
-            - v3-plt-cache-{{ arch }}
-            - v3-plt-cache
+            - v4-plt-cache-{{ arch }}-{{ checksum "mix.lock" }}-{{ checksum "otp-and-elixir.version" }}
+            - v4-plt-cache-{{ arch }}
+            - v4-plt-cache
 
       - run: mix dialyzer --plt
 
       - save_cache:
-          key: v3-plt-cache-{{ arch }}-{{ checksum "mix.lock" }}
+          key: v4-plt-cache-{{ arch }}-{{ checksum "mix.lock" }}-{{ checksum "otp-and-elixir.version" }}
           paths:
             - _build
             - ~/.mix
