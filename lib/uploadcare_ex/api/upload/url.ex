@@ -2,6 +2,7 @@ defmodule UploadcareEx.API.Upload.Url do
   use Retry
 
   import UploadcareEx.API.Urls
+  require Logger
 
   @moduledoc false
 
@@ -37,8 +38,9 @@ defmodule UploadcareEx.API.Upload.Url do
         {:ok, %{status_code: 200, body: %{"status" => "success"} = resp}} ->
           {:halt, {:ok, resp}}
 
-        # если uploadcare не успел обработать запрос, повторяем запрос с задержкой
-        {:ok, %{status_code: 200, body: %{"status" => "unknown"}} = resp} ->
+        # retry status check with delay when upload still in progress
+        {:ok, %{status_code: 200, body: %{"status" => status}} = resp}
+        when status in ["unknown", "progress"] ->
           {:cont, {:error, resp}}
 
         other ->
