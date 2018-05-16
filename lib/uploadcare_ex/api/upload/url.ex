@@ -2,6 +2,7 @@ defmodule UploadcareEx.API.Upload.Url do
   use Retry
 
   import UploadcareEx.API.Urls
+  require Logger
 
   @moduledoc false
 
@@ -32,16 +33,20 @@ defmodule UploadcareEx.API.Upload.Url do
     retry_period = Config.upload_url_retry_period()
     retry_expiry = Config.upload_url_retry_expiry()
 
-    retry_while with: exp_backoff() |> randomize() |> cap(retry_period) |> expiry(retry_expiry) do
+    retry_while with: exp_backoff(1_000) |> randomize() |> cap(retry_period) |> expiry(retry_expiry) do
       case url |> Request.request(:get) do
         {:ok, %{status_code: 200, body: %{"status" => "success"} = resp}} ->
+          Logger.info("success: status_token=#{token} return=#{inspect(resp)}")
           {:halt, {:ok, resp}}
 
-        # если uploadcare не успел обработать запрос, повторяем запрос с задержкой
-        {:ok, %{status_code: 200, body: %{"status" => "unknown"}} = resp} ->
+        # retry status check with delay when upload still in progress
+        {:ok, %{status_code: 200, body: %{"status" => status}} = resp}
+        when status in ["unknown", "progress"] ->
+          Logger.info("failed:  status_token=#{token} return=#{inspect(resp)}")
           {:cont, {:error, resp}}
 
         other ->
+          Logger.info("expired:  status_token=#{token} return=#{inspect(other)}")
           {:halt, other}
       end
     end

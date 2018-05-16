@@ -59,7 +59,7 @@ defmodule UploadcareEx.Config do
 
   @spec upload_url_retry_period() :: number()
   def upload_url_retry_period do
-    Application.get_env(:uploadcare_ex, :upload_url_retry_period) || 300
+    Application.get_env(:uploadcare_ex, :upload_url_retry_period) || 2_000
   end
 
   @spec upload_url_retry_expiry() :: number()

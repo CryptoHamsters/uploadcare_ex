@@ -5,6 +5,8 @@ defmodule UploadcareEx.Request do
 
   import UploadcareEx.Config
 
+  require Logger
+
   alias Poison.SyntaxError, as: JsonError
 
   @type response :: %{status_code: number(), body: map() | binary()}
@@ -19,8 +21,13 @@ defmodule UploadcareEx.Request do
   defp request_with_retries(url, http_method, data, headers) do
     retry with: exp_backoff() |> randomize() |> cap(retry_period()) |> expiry(retry_expiry()) do
       case send_request(url, http_method, data, headers) do
-        response = %{status_code: _} -> response |> check_status()
-        other -> {:error, other}
+        response = %{status_code: _} ->
+          Logger.info("#{http_method} #{url} response=#{inspect(response)}")
+          response |> check_status()
+
+        other ->
+          Logger.info("#{http_method} #{url} response=#{inspect(other)}")
+          {:error, other}
       end
     end
   end
