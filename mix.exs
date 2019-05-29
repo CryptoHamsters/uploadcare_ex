@@ -27,7 +27,7 @@ defmodule UploadcareEx.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.0"},
-      {:poison, "~> 2.0 or ~> 3.1 or ~> 4.0"},
+      {:poison, "~> 2.0 or ~> 3.1"},
       {:retry, "~> 0.8"},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       {:exvcr, "~> 0.10", only: :test},
