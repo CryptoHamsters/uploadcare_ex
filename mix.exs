@@ -20,7 +20,7 @@ defmodule UploadcareEx.MixProject do
 
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger, :retry]
     ]
   end
 
@@ -28,7 +28,7 @@ defmodule UploadcareEx.MixProject do
     [
       {:httpoison, "~> 1.0"},
       {:poison, "~> 2.0 or ~> 3.1"},
-      {:retry, "~> 0.8"},
+      {:retry, "~> 0.13"},
       {:ex_doc, "~> 0.16", only: :dev, runtime: false},
       {:exvcr, "~> 0.10", only: :test},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},

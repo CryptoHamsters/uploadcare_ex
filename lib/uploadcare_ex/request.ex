@@ -22,6 +22,10 @@ defmodule UploadcareEx.Request do
         response = %{status_code: _} -> response |> check_status()
         other -> {:error, other}
       end
+    after
+      result -> result
+    else
+      error -> error
     end
   end
 
