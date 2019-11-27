@@ -42,14 +42,7 @@ defmodule UploadcareEx do
   Examples:
 
       iex> UploadcareEx.upload_url("https://avatars0.githubusercontent.com/u/6567687?s=460&v=4")
-      {:ok,
-       %{
-         "done" => 20344,
-         "file_id" => "b82a3688-27fb-431d-aac8-1b50553b8779",
-         "filename" => "6567687",
-         ...
-        }
-      }
+      {:ok, "a295f184-0328-4b30-be4d-f215d9cdbed7"}
 
       iex> UploadcareEx.upload_url("https://google.com")
       {:error,
@@ -62,7 +55,7 @@ defmodule UploadcareEx do
        }
       }
   """
-  @spec upload_url(binary()) :: {:ok, map()} | {:error, any()}
+  @spec upload_url(binary()) :: {:ok, binary()} | {:error, any()}
   defdelegate upload_url(url), to: UploadApi
 
   @doc """
