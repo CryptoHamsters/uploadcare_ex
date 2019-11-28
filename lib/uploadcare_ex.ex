@@ -73,6 +73,20 @@ defmodule UploadcareEx do
   defdelegate upload_file(file_path), to: UploadApi
 
   @doc """
+  Uploads a file from provided binary data. Returns created file uuid.
+
+  Examples:
+
+      iex> UploadcareEx.upload_file(<<137, 80, 78>>, "file_name", "image/png")
+      {:ok, "a295f184-0328-4b30-be4d-f215d9cdbed7"}
+
+      iex> UploadcareEx.upload_file(nil, "file_name", "image/png")
+      {:error, %HTTPoison.Error{id: nil, reason: :enoent}}
+  """
+  @spec upload_file(binary(),binary() ,binary()) :: {:ok, binary()} | {:error, any()}
+  defdelegate upload_file(data, filename, content_type), to: UploadApi
+
+  @doc """
   Acquires file-specific info by its uuid.
 
   Examples:
