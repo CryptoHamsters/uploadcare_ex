@@ -54,7 +54,7 @@ defmodule UploadcareEx.API.Upload.File do
       [
         {"UPLOADCARE_PUB_KEY", Config.public_key()},
         {"UPLOADCARE_STORE", Config.store()},
-        {"file", IO.iodata_to_binary(data),
+        {:file, IO.iodata_to_binary(data),
          {"form-data", [{"name", "\"file\""}, {"filename", "\"#{filename}\""}]},
          [{"Content-Type", content_type}]}
       ]
