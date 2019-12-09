@@ -11,8 +11,8 @@ defmodule UploadcareEx.API.Upload.Url do
   @spec upload(binary()) :: {:ok, binary()} | {:error, any()}
   def upload(url) do
     with {:ok, token} <- url |> try_to_upload(),
-         {:ok, _result} <- token |> check_token_status() do
-      {:ok, token}
+         {:ok, result} <- token |> check_token_status() do
+      {:ok, result}
     end
   end
 
