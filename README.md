@@ -36,7 +36,7 @@ config :uploadcare_ex,
   retry_period: 1_000,
   retry_expiry: 5_000
 ```
-
+```store``` “0“ - upload as temporary file or ”1” - upload and store
 ```retry_period``` and ```retry_expiry``` parameters are used for request retries in case of Uploadcare service server errors. Their default values are 1_000 and 5_000 respectively.
 
 ## Usage
